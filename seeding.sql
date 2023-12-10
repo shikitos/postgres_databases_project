@@ -148,7 +148,7 @@ VALUES (1, 'https://example.com/scene1', 'Scene 1'),
        (11, 'https://example.com/scene11', 'Scene 11'),
        (12, 'https://example.com/scene12', 'Scene 12');
 
-INSERT INTO Project.Audios (audio_data, auidio_for_scene_id)
+INSERT INTO Project.Audios (audio_data, audio_for_scene_id)
 VALUES (E'\\x0123456789ABCDEF', 1),
        (E'\\xABCDEF0123456789', 2),
        (E'\\x2233445566778899', 3),

@@ -7,13 +7,13 @@ FROM Project.Users u
 SELECT u.user_email,
        p.project_name,
        scenes.scene_name,
-       Project.Markers.marker_id,
-       Project.Audios.audio_id,
-       Project.Objects.object_id
+       markers.marker_id,
+       audios.audio_id,
+       objects.object_id
 FROM Project.Users u
          INNER JOIN Project.Projects p ON p.project_for_user_id = u.user_id
          INNER JOIN Project.Scenes scenes ON scenes.scene_for_project_id = p.project_id
-         INNER JOIN Project.Audios audios ON audios.auidio_for_scene_id = scenes.scene_id
+         INNER JOIN Project.Audios audios ON audios.audio_for_scene_id = scenes.scene_id
          INNER JOIN Project.Markers markers ON markers.marker_for_scene_id = scenes.scene_id
          INNER JOIN Project.Objects objects ON objects.object_for_scene_id = scenes.scene_id
 WHERE user_email = 'user1@example.com';
@@ -24,7 +24,7 @@ WHERE user_email = 'user1@example.com';
 -- Get user's items in his cart
 SELECT u.user_id, u.user_email, c.cart_id, p.product_name, p.product_price
 FROM Project.Users u
-         LEFT JOIN project.carts c on u.user_id = c.cart_for_user_id
+         LEFT JOIN project.carts c on u.user_id = c.cart_id
          LEFT JOIN project.cart_products cp on c.cart_id = cp.cart_id
          LEFT JOIN project.products p on p.product_id = cp.cart_product_id
 ORDER BY user_id;
