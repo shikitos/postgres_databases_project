@@ -27,7 +27,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER set_default_username_trigger
+CREATE OR REPLACE TRIGGER set_default_username_trigger
     BEFORE INSERT
     ON Project.Users
     FOR EACH ROW
@@ -72,7 +72,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER set_default_project_name_trigger
+CREATE OR REPLACE TRIGGER set_default_project_name_trigger
     BEFORE INSERT
     ON Project.Projects
     FOR EACH ROW
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS Project.Products
 CREATE TABLE IF NOT EXISTS Project.Carts
 (
     cart_id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT NOT NULL UNIQUE,
     FOREIGN KEY (user_id) REFERENCES Project.Users (user_id)
 );
 
@@ -212,7 +212,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Add limits after user added
-CREATE TRIGGER trigger_create_limits
+CREATE OR REPLACE TRIGGER trigger_create_limits
     AFTER INSERT
     ON Project.Users
     FOR EACH ROW
@@ -230,7 +230,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_create_cart
+CREATE OR REPLACE TRIGGER trigger_create_cart
     AFTER INSERT
     ON Project.Users
     FOR EACH ROW
